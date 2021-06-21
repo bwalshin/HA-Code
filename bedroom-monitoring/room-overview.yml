@@ -1,0 +1,175 @@
+type: custom:mod-card
+card_mod:
+  style: |
+    ha-card {
+    background-color: #413f3f;
+    padding-bottom: 10px;
+    }
+card:
+  type: vertical-stack
+  cards:
+    - type: custom:banner-card
+      heading:
+        - mdi:bed
+        - Bedroom
+      background: '#413f3f'
+      link: /lovelace/bedroom
+    - type: entities
+      entities:
+        - entity: sensor.awair_element_awair_score
+          type: custom:multiple-entity-row
+          secondary_info:
+            entity: sensor.awair_element_awair_score
+            name: Score
+          show_state: false
+          name: Awair
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/bedroom
+            haptic: heavy
+          entities:
+            - entity: sensor.awair_element_awair_score
+              name: Score
+            - entity: sensor.awair_element_temperature
+              name: Temp
+              styles:
+                color: var(--awair-temp-color)
+            - entity: sensor.awair_element_humidity
+              name: Humidity
+              styles:
+                color: var(--awair-humidity-color)
+            - entity: sensor.awair_element_carbon_dioxide
+              name: CO2
+              styles:
+                color: var(--awair-CO2-color)
+            - entity: sensor.awair_element_volatile_organic_compounds
+              name: VOCs
+              styles:
+                color: var(--awair-VOCs-color)
+            - entity: sensor.awair_element_pm2_5
+              name: PM2.5
+              styles:
+                color: var(--awair-PM2_5-color)
+          style: |
+            :host {
+              --awair-score-color:
+                {% set temp = states('sensor.awair_element_awair_score') | float %}
+                {% if temp <= 0 %} #E9343A
+                {% elif temp <= 50 %} #F98704
+                {% elif temp <= 100 %} #43B02A
+                {% endif %};
+              --awair-temp-color:
+                {% set temp = states('sensor.awair_element_temperature') | float %}
+                {% if temp <= 0 %} #E9343A
+                {% elif temp <= 48.2 %} #F98704
+                {% elif temp <= 51.8 %} #FAA826
+                {% elif temp <= 62.6 %} #FDD125
+                {% elif temp <= 64.4 %} #49CE4C
+                {% elif temp <= 77 %} #FDD125
+                {% elif temp <= 78.8 %} #FAA826
+                {% elif temp <= 89.6 %} #F98704
+                {% elif temp <= 93.2 %} #E9343A
+                {% endif %};
+              --awair-humidity-color:
+                {% set temp = states('sensor.awair_element_humidity') | float %}
+                {% if temp <= 0 %} #E9343A
+                {% elif temp <= 15 %} #F98704
+                {% elif temp <= 20 %} #FAA826
+                {% elif temp <= 35 %} #FDD125
+                {% elif temp <= 40 %} #49CE4C
+                {% elif temp <= 50 %} #FDD125
+                {% elif temp <= 60 %} #FAA826
+                {% elif temp <= 65 %} #F98704
+                {% elif temp <= 80 %} #E9343A
+                {% endif %};
+              --awair-CO2-color:
+                {% set temp = states('sensor.awair_element_carbon_dioxide') | float %}
+                {% if temp == 0 %} #E9343A
+                {% elif temp <= 0 %} #49CE4C
+                {% elif temp <= 600 %} #FDD125 
+                {% elif temp <= 1000 %} #FAA826
+                {% elif temp <= 1500 %} #F98704
+                {% elif temp <= 2500 %} #E9343A
+                {% endif %};
+              --awair-VOCs-color:
+                {% set temp = states('sensor.awair_element_volatile_organic_compounds') | float %}
+                {% if temp == 0 %} #E9343A
+                {% elif temp <= 0 %} #49CE4C
+                {% elif temp <= 333 %} #FDD125 
+                {% elif temp <= 1000 %} #FAA826
+                {% elif temp <= 3333 %} #F98704
+                {% elif temp <= 8332 %} #E9343A
+                {% endif %};
+              --awair-PM2_5-color:
+                {% set temp = states('--awair-PM2_5-color') | float %}
+                {% if temp == 0 %} #E9343A
+                {% elif temp <= 0 %} #49CE4C
+                {% elif temp <= 15 %} #FDD125 
+                {% elif temp <= 35 %} #FAA826
+                {% elif temp <= 55 %} #F98704
+                {% elif temp <= 75 %} #E9343A
+                {% endif %};
+              # --secondary-text-color:
+              #   {% set temp = states('sensor.awair_element_awair_score') | float %}
+              #   {% if temp <= 0 %} #E9343A
+              #   {% elif temp <= 50 %} #F98704
+              #   {% elif temp <= 100 %} #43B02A
+              #   {% endif %};
+                }
+        - entity: fan.bedroom_air_purifier
+          type: custom:multiple-entity-row
+          secondary_info:
+            attribute: air_quality
+          show_state: true
+          state_header: Status
+          name: Air Purifier
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/bedroom
+            haptic: heavy
+          entities:
+            - attribute: air_quality
+              name: AQI
+              styles:
+                color: var(--purifier-airquality-color)
+            - attribute: speed
+              name: Fan Speed
+            - attribute: filter_life
+              name: Filter Life
+              unit: '%'
+              styles:
+                color: var(--purifier-filterlife-color)
+            - attribute: screen_status
+              name: Screen
+              styles:
+                color: var(--purifier-screenstatus-color)
+          style: |
+            :host {
+              --purifier-screenstatus-color:
+                {% set temp = state_attr('fan.bedroom_air_purifier', 'screen_status') %}
+                {% if temp == "on" %} #FAA826
+                {% elif temp == "off" %} #43B02A
+                {% endif %};
+              --purifier-filterlife-color:
+                {% set temp = states('sensor.bedroom_air_purifier_filter_life') | float %}
+                {% if temp <= 0 %} #E9343A
+                {% elif temp <= 25 %} #F98704
+                {% elif temp <= 50 %} #FAA826
+                {% elif temp <= 75 %} #FDD125
+                {% elif temp <= 100 %} #43B02A
+                {% endif %};
+              --purifier-airquality-color:
+                {% set temp = states('sensor.bedroom_air_purifier_air_quality') %}
+                {% if temp == "poor" %} #E9343A
+                {% elif temp == "moderate" %} #F98704
+                {% elif temp == "good" %} #FDD125
+                {% elif temp == "excellent" %} #43B02A
+                {% endif %};
+              # --secondary-text-color:
+              #   {% set temp = states('sensor.bedroom_air_purifier_air_quality') %}
+              #   {% if temp == "poor" %} #E9343A
+              #   {% elif temp == "moderate" %} #F98704
+              #   {% elif temp == "good" %} #FDD125
+              #   {% elif temp == "excellent" %} #43B02A
+              #   {% endif %};
+                }

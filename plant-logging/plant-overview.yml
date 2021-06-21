@@ -1,0 +1,177 @@
+type: custom:mod-card
+card_mod:
+  style: |
+    ha-card {
+    background-color: #413f3f;
+    padding-bottom: 10px;
+    }
+card:
+  type: vertical-stack
+  cards:
+    - type: custom:banner-card
+      heading:
+        - mdi:flower
+        - Plants
+      background: '#413f3f'
+      link: /lovelace/plants
+    - type: entities
+      entities:
+        - entity: sensor.ble_moisture_coffee_arabica
+          type: custom:multiple-entity-row
+          secondary_info: last-changed
+          show_state: false
+          name: Coffee arabica
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/plants
+            haptic: medium
+          entities:
+            - entity: sensor.ble_moisture_coffee_arabica
+              name: Moisture
+              styles:
+                color: var(--ca-moist-color)
+            - entity: sensor.ble_temperature_coffee_arabica
+              name: Temp
+              styles:
+                color: var(--ca-temp-color)
+            - entity: sensor.ble_conductivity_coffee_arabica
+              name: Fertility
+              styles:
+                color: var(--ca-fert-color)
+            - entity: sensor.ble_illuminance_coffee_arabica
+              name: Light
+              styles:
+                color: var(--ca-light-color)
+          style: |
+            :host {
+              --ca-moist-color:
+                {% set temp = states('sensor.ble_moisture_coffee_arabica') | float %}
+                {% if temp <= 15 %} #E9343A
+                {% elif temp <= 37.5 %} #F98704
+                {% elif temp <= 60 %} #43B02A
+                {% endif %};
+              --ca-temp-color:
+                {% set temp = states('sensor.ble_temperature_coffee_arabica') | float %}
+                {% if temp <= 50 %} #E9343A
+                {% elif temp <= 69.5 %} #F98704
+                {% elif temp <= 89 %} #43B02A
+                {% endif %};
+              --ca-fert-color:
+                {% set temp = states('sensor.ble_conductivity_coffee_arabica') | float %}
+                {% if temp <= 350 %} #E9343A
+                {% elif temp <= 9825 %} #F98704
+                {% elif temp <= 20000 %} #43B02A
+                {% endif %};
+              --ca-light-color:
+                {% set temp = states('sensor.ble_illuminance_coffee_arabica') | float %}
+                {% if temp <= 3700 %} #E9343A
+                {% elif temp <= 11850 %} #F98704
+                {% elif temp <= 20000 %} #43B02A
+                {% endif %};
+                }
+        - entity: sensor.ble_moisture_monstera_deliciosa
+          type: custom:multiple-entity-row
+          secondary_info: last-changed
+          show_state: false
+          name: Monstera deliciosa
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/plants
+            haptic: medium
+          entities:
+            - entity: sensor.ble_moisture_monstera_deliciosa
+              name: Moisture
+              styles:
+                color: var(--mondel-moist-color)
+            - entity: sensor.ble_temperature_monstera_deliciosa
+              name: Temp
+              styles:
+                color: var(--mondel-temp-color)
+            - entity: sensor.ble_conductivity_monstera_deliciosa
+              name: Fertility
+              styles:
+                color: var(--mondel-fert-color)
+            - entity: sensor.ble_illuminance_monstera_deliciosa
+              name: Light
+              styles:
+                color: var(--mondel-light-color)
+          style: |
+            :host {
+              --mondel-moist-color:
+                {% set temp = states('sensor.ble_moisture_monstera_deliciosa') | float %}
+                {% if temp <= 15 %} #E9343A
+                {% elif temp <= 37.5 %} #F98704
+                {% elif temp <= 60 %} #43B02A
+                {% endif %};
+              --mondel-temp-color:
+                {% set temp = states('sensor.ble_temperature_monstera_deliciosa') | float %}
+                {% if temp <= 50 %} #E9343A
+                {% elif temp <= 69.5 %} #F98704
+                {% elif temp <= 89 %} #43B02A
+                {% endif %};
+              --mondel-fert-color:
+                {% set temp = states('sensor.ble_conductivity_monstera_deliciosa') | float %}
+                {% if temp <= 350 %} #E9343A
+                {% elif temp <= 9825 %} #F98704
+                {% elif temp <= 20000 %} #43B02A
+                {% endif %};
+              --mondel-light-color:
+                {% set temp = states('sensor.ble_illuminance_monstera_deliciosa') | float %}
+                {% if temp <= 800 %} #E9343A
+                {% elif temp <= 7100 %} #F98704
+                {% elif temp <= 15000 %} #43B02A
+                {% endif %};
+                }
+        - entity: sensor.ble_moisture_dracaena_marginata
+          type: custom:multiple-entity-row
+          secondary_info: last-changed
+          show_state: false
+          name: Dracaena marginata
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/plants
+            haptic: medium
+          entities:
+            - entity: sensor.ble_moisture_dracaena_marginata
+              name: Moisture
+              styles:
+                color: var(--dracmarg-moist-color)
+            - entity: sensor.ble_temperature_dracaena_marginata
+              name: Temp
+              styles:
+                color: var(--dracmarg-temp-color)
+            - entity: sensor.ble_conductivity_dracaena_marginata
+              name: Fertility
+              styles:
+                color: var(--dracmarg-fert-color)
+            - entity: sensor.ble_illuminance_dracaena_marginata
+              name: Light
+              styles:
+                color: var(--dracmarg-light-color)
+          style: |
+            :host {
+              --dracmarg-moist-color:
+                {% set temp = states('sensor.ble_moisture_dracaena_marginata') | float %}
+                {% if temp <= 15 %} #E9343A
+                {% elif temp <= 37.5 %} #F98704
+                {% elif temp <= 60 %} #43B02A
+                {% endif %};
+              --dracmarg-temp-color:
+                {% set temp = states('sensor.ble_temperature_dracaena_marginata') | float %}
+                {% if temp <= 50 %} #E9343A
+                {% elif temp <= 69.5 %} #F98704
+                {% elif temp <= 89 %} #43B02A
+                {% endif %};
+              --dracmarg-fert-color:
+                {% set temp = states('sensor.ble_conductivity_dracaena_marginata') | float %}
+                {% if temp <= 350 %} #E9343A
+                {% elif temp <= 9825 %} #F98704
+                {% elif temp <= 20000 %} #43B02A
+                {% endif %};
+              --dracmarg-light-color:
+                {% set temp = states('sensor.ble_illuminance_dracaena_marginata') | float %}
+                {% if temp <= 1500 %} #E9343A
+                {% elif temp <= 7100 %} #F98704
+                {% elif temp <= 6000 %} #43B02A
+                {% endif %};
+                }

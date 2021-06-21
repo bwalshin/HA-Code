@@ -1,0 +1,153 @@
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    title: Bedroom Awair
+    cards:
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.awair_element_awair_score
+            name: Awair Score
+        color_thresholds:
+          - value: 0
+            color: '#BE3A34'
+          - value: 50
+            color: '#DBE442'
+          - value: 100
+            color: '#43B02A'
+        name: Awair Score
+        hours_to_show: 24
+        hour24: true
+        animate: true
+        group_by: hour
+        show:
+          icon_adaptive_color: true
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.awair_element_temperature
+            name: Awair Temperature
+        color_thresholds:
+          - value: 0
+            color: '#E9343A'
+          - value: 48.2
+            color: '#F98704'
+          - value: 51.8
+            color: '#FAA826'
+          - value: 62.6
+            color: '#FDD125'
+          - value: 64.4
+            color: '#49CE4C'
+          - value: 77
+            color: '#FDD125'
+          - value: 78.8
+            color: '#FAA826'
+          - value: 89.6
+            color: '#F98704'
+          - value: 93.2
+            color: '#E9343A'
+        name: Awair Temperature
+        hours_to_show: 24
+        hour24: true
+        animate: true
+        group_by: hour
+        show:
+          icon_adaptive_color: true
+  - type: horizontal-stack
+    cards:
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.awair_element_humidity
+            name: Awair Humidity
+        color_thresholds:
+          - value: 0
+            color: '#E9343A'
+          - value: 15
+            color: '#F98704'
+          - value: 20
+            color: '#FAA826'
+          - value: 35
+            color: '#FDD125'
+          - value: 40
+            color: '#49CE4C'
+          - value: 50
+            color: '#FDD125'
+          - value: 60
+            color: '#FAA826'
+          - value: 65
+            color: '#F98704'
+          - value: 80
+            color: '#E9343A'
+        name: Awair Humidity
+        hours_to_show: 24
+        hour24: true
+        animate: true
+        group_by: hour
+        show:
+          icon_adaptive_color: true
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.awair_element_carbon_dioxide
+            name: Awair CO2
+        color_thresholds:
+          - value: 0
+            color: '#49CE4C'
+          - value: 600
+            color: '#FDD125'
+          - value: 1000
+            color: '#FAA826'
+          - value: 1500
+            color: '#F98704'
+          - value: 2500
+            color: '#E9343A'
+        name: Awair CO2
+        hours_to_show: 24
+        hour24: true
+        animate: true
+        group_by: hour
+        show:
+          icon_adaptive_color: true
+  - type: horizontal-stack
+    cards:
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.awair_element_volatile_organic_compounds
+            name: Awair VOCs
+        color_thresholds:
+          - value: 0
+            color: '#49CE4C'
+          - value: 333
+            color: '#FDD125'
+          - value: 1000
+            color: '#FAA826'
+          - value: 3333
+            color: '#F98704'
+          - value: 8332
+            color: '#E9343A'
+        name: Awair VOCs
+        hours_to_show: 24
+        hour24: true
+        animate: true
+        group_by: hour
+        show:
+          icon_adaptive_color: true
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.awair_element_pm2_5
+            name: Awair PM2.5
+        color_thresholds:
+          - value: 0
+            color: '#49CE4C'
+          - value: 15
+            color: '#FDD125'
+          - value: 35
+            color: '#FAA826'
+          - value: 55
+            color: '#F98704'
+          - value: 75
+            color: '#E9343A'
+        name: Awair PM2.5
+        hours_to_show: 24
+        hour24: true
+        animate: true
+        group_by: hour
+        show:
+          icon_adaptive_color: true

@@ -1,0 +1,36 @@
+type: vertical-stack
+cards:
+  - type: custom:purifier-card
+    entity: fan.bedroom_air_purifier
+    stats:
+      - attribute: filter_life
+        unit: '%'
+        subtitle: Filter Remaining
+      - attribute: screen_status
+        subtitle: Screen Status
+    aqi:
+      entity: bedroom_air_purifier.air_quality
+      attribute: air_quality
+    actions:
+      - name: Sleep
+        icon: mdi:weather-night
+        speed: sleep
+      - name: Low
+        icon: mdi:circle-slice-3
+        speed: low
+      - name: Medium
+        icon: mdi:circle-slice-4
+        speed: medium
+      - name: High
+        icon: mdi:circle-slice-8
+        speed: high
+      - name: Auto
+        icon: mdi:brightness-auto
+        speed: auto
+      - name: No Power
+        icon: mdi:circle-off-outline
+        speed: 'off'
+    show_name: true
+    show_state: true
+    show_toolbar: true
+    compact_view: false
