@@ -1,0 +1,89 @@
+type: custom:mod-card
+card_mod:
+  style: |
+    ha-card {
+      background-color: #413f3f;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+card:
+  type: vertical-stack
+  cards:
+    - type: entities
+      entities:
+        - entity: weather.home
+          type: custom:multiple-entity-row
+          name: Temps
+          show_state: true
+          state_header: Status
+          entities:
+            - entity: sensor.awair_element_temperature
+              name: Upstairs
+              styles:
+                color: var(--upstairs-temperature)
+            - entity: sensor.ble_temperature_monstera_deliciosa
+              name: Downstairs
+              styles:
+                color: var(--downstairs-temperature)
+            - attribute: temperature
+              name: Outside
+              unit: °F
+              styles:
+                color: var(--outside-temperature)
+          style: |
+            .entities-row {
+            flex-direction: row-reverse;
+            width: 100%
+            }
+            :host {
+              --purifier-screenstatus-color:
+                {% set temp = state_attr('fan.bedroom_air_purifier', 'screen_status') %}
+                {% if temp == "on" %} #FAA826
+                {% elif temp == "off" %} #43B02A
+                {% endif %};
+              --upstairs-temperature:
+                {% set temp = states('sensor.awair_element_temperature') | float %}
+                {% if temp <= 0 %} #9b2fad
+                {% elif temp <= 10 %} #663fb4
+                {% elif temp <= 20 %} #4055b1
+                {% elif temp <= 30 %} #587cf7
+                {% elif temp <= 40 %} #1eaaf0
+                {% elif temp <= 50 %} #20bcd1
+                {% elif temp <= 60 %} #159587
+                {% elif temp <= 70 %} #2d9a2d
+                {% elif temp <= 80 %} #8cc051
+                {% elif temp <= 90 %} #fdc030
+                {% elif temp <= 100 %} #fd9728
+                {% elif temp >= 101 %} #fb582f
+                {% endif %};
+              --downstairs-temperature:
+                {% set temp = states('sensor.awair_element_temperature') | float %}
+                {% if temp <= 0 %} #9b2fad
+                {% elif temp <= 10 %} #663fb4
+                {% elif temp <= 20 %} #4055b1
+                {% elif temp <= 30 %} #587cf7
+                {% elif temp <= 40 %} #1eaaf0
+                {% elif temp <= 50 %} #20bcd1
+                {% elif temp <= 60 %} #159587
+                {% elif temp <= 70 %} #2d9a2d
+                {% elif temp <= 80 %} #8cc051
+                {% elif temp <= 90 %} #fdc030
+                {% elif temp <= 100 %} #fd9728
+                {% elif temp >= 101 %} #fb582f
+                {% endif %};
+              --outside-temperature:
+                {% set temp = states('sensor.awair_element_temperature') | float %}
+                {% if temp <= 0 %} #9b2fad
+                {% elif temp <= 10 %} #663fb4
+                {% elif temp <= 20 %} #4055b1
+                {% elif temp <= 30 %} #587cf7
+                {% elif temp <= 40 %} #1eaaf0
+                {% elif temp <= 50 %} #20bcd1
+                {% elif temp <= 60 %} #159587
+                {% elif temp <= 70 %} #2d9a2d
+                {% elif temp <= 80 %} #8cc051
+                {% elif temp <= 90 %} #fdc030
+                {% elif temp <= 100 %} #fd9728
+                {% elif temp >= 101 %} #fb582f
+                {% endif %};
+                }

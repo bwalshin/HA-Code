@@ -18,9 +18,9 @@ card:
       entities:
         - entity: sensor.awair_element_awair_score
           type: custom:multiple-entity-row
-          secondary_info:
-            entity: sensor.awair_element_awair_score
-            name: Score
+          # secondary_info:
+          #   entity: sensor.awair_element_awair_score
+          #   name: Score
           show_state: false
           name: Awair
           tap_action:
@@ -51,6 +51,12 @@ card:
               styles:
                 color: var(--awair-PM2_5-color)
           style: |
+            .entities-row {
+              width: 100%
+            }
+            # .state-badge {
+            #   display: none
+            # }
             :host {
               --awair-score-color:
                 {% set temp = states('sensor.awair_element_awair_score') | float %}
@@ -118,8 +124,8 @@ card:
                 }
         - entity: fan.bedroom_air_purifier
           type: custom:multiple-entity-row
-          secondary_info:
-            attribute: air_quality
+          # secondary_info:
+          #   attribute: air_quality
           show_state: true
           state_header: Status
           name: Air Purifier
@@ -144,6 +150,9 @@ card:
               styles:
                 color: var(--purifier-screenstatus-color)
           style: |
+            .entities-row {
+            width: 100%
+            }
             :host {
               --purifier-screenstatus-color:
                 {% set temp = state_attr('fan.bedroom_air_purifier', 'screen_status') %}

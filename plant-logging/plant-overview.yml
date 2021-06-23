@@ -175,3 +175,56 @@ card:
                 {% elif temp <= 6000 %} #43B02A
                 {% endif %};
                 }
+        - entity: sensor.ble_moisture_dracaena_marginata
+          type: custom:multiple-entity-row
+          secondary_info: last-changed
+          show_state: false
+          name: Ananas comosus
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/plants
+            haptic: medium
+          entities:
+            - entity: sensor.ble_moisture_dracaena_marginata
+              name: Moisture
+              styles:
+                color: var(--pineapple-moist-color)
+            - entity: sensor.ble_temperature_dracaena_marginata
+              name: Temp
+              styles:
+                color: var(--pineapple-temp-color)
+            - entity: sensor.ble_conductivity_dracaena_marginata
+              name: Fertility
+              styles:
+                color: var(--pineapple-fert-color)
+            - entity: sensor.ble_illuminance_dracaena_marginata
+              name: Light
+              styles:
+                color: var(--pineapple-light-color)
+          style: |
+            :host {
+              --pineapple-moist-color:
+                {% set temp = states('sensor.ble_moisture_dracaena_marginata') | float %}
+                {% if temp <= 15 %} #E9343A
+                {% elif temp <= 37.5 %} #F98704
+                {% elif temp <= 60 %} #43B02A
+                {% endif %};
+              --pineapple-temp-color:
+                {% set temp = states('sensor.ble_temperature_dracaena_marginata') | float %}
+                {% if temp <= 50 %} #E9343A
+                {% elif temp <= 72.5 %} #F98704
+                {% elif temp <= 95 %} #43B02A
+                {% endif %};
+              --pineapple-fert-color:
+                {% set temp = states('sensor.ble_conductivity_dracaena_marginata') | float %}
+                {% if temp <= 350 %} #E9343A
+                {% elif temp <= 9825 %} #F98704
+                {% elif temp <= 20000 %} #43B02A
+                {% endif %};
+              --pineapple-light-color:
+                {% set temp = states('sensor.ble_illuminance_dracaena_marginata') | float %}
+                {% if temp <= 3000 %} #E9343A
+                {% elif temp <= 19000 %} #F98704
+                {% elif temp <= 35000 %} #43B02A
+                {% endif %};
+                }
