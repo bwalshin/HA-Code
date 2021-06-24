@@ -1,0 +1,163 @@
+
+### Configure a default setup of Home Assistant (frontend, api, etc) #############################################
+default_config:
+
+### Text to speech #############################################
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+### System Adjustments #############################################
+discovery:
+
+downloader:
+  download_dir: downloads
+
+### LOGGER #############################################
+logger:
+  default: info
+  logs:
+    custom_components.ble_monitor: debug
+    homeassistant.components.miflora: debug
+    miflora.miflora_poller: debug
+    
+    
+### AIR PURIFIER - BSENSOR #############################################
+binary_sensor:
+  - platform: template
+    sensors:
+      bedroom_air_purifier_screen_status:
+        device_class: 'power'
+        friendly_name: Screen Status
+        value_template: "{{ state_attr('fan.bedroom_air_purifier', 'screen_status') }}"
+        icon_template: >-
+          {% if is_state("binary_sensor.bedroom_air_purifier_screen_status", "on") %}
+            mdi:checkbox-blank
+          {% else %}
+            mdi:checkbox-blank-off-outline
+          {% endif %}
+
+
+### TIME AND DATE #############################################
+sensor:
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_utc'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
+
+### XFINITY USAGE #############################################
+#   - platform: xfinity
+#     username: !secret xfinity_email
+#     password: !secret xfinity_password
+
+
+### ASUS ROUTER #############################################
+  - platform: template
+    sensors:
+      asuswrt_download_speed_kbps:
+        value_template: "{{ states('sensor.asuswrt_download_speed') | multiply(1000)}}"
+        friendly_name: AsusWRT Download Speed Kbps
+        icon_template: mdi:Download
+        unit_of_measurement: "Kbps"
+
+      asuswrt_upload_speed_kbps:
+        value_template: "{{ states('sensor.asuswrt_upload_speed') | multiply(1000)}}"
+        friendly_name: AsusWRT Upload Speed Kbps
+        icon_template: mdi:Upload
+        unit_of_measurement: "Kbps"
+
+
+### RING DOORBELL #############################################
+      friendly_front_door_last_activity:
+        value_template: "{% set entity_id = 'sensor.front_door_last_activity' %} {{ ( now().timestamp() + states(entity_id) | float * 60 ) | timestamp_custom('%B %d %Y  %H:%M:%S') }}"
+        friendly_name: Front Door Last Activity
+        icon_template: mdi:history
+        device_class: 'timestamp'
+
+
+### AIR PURIFIER - SENSORS #############################################
+      bedroom_air_purifier_filter_life:
+        device_class: 'power_factor'
+        unit_of_measurement: "%"
+        friendly_name: Air Filter Life
+        value_template: "{{ state_attr('fan.bedroom_air_purifier', 'filter_life') }}"
+        icon_template: mdi:air-filter
+
+      bedroom_air_purifier_air_quality:
+        friendly_name: Air Quality
+        value_template: "{{ state_attr('fan.bedroom_air_purifier', 'air_quality') }}"
+        icon_template: mdi:cloud
+
+      bedroom_air_purifier_active_time:
+        friendly_name: Active Time
+        value_template: "{{ state_attr('fan.bedroom_air_purifier', 'active_time') }}"
+        icon_template: mdi:timeline-clock
+
+
+### PLANT SENSORS #############################################
+
+#   - platform: miflora
+#     mac: "C4:7C:8D:66:37:B4"
+#     name: Coffee Arabica
+#     force_update: true
+#     median: 3
+#     go_unavailable_timeout: 43200
+#     scan_interval: 43200
+#     monitored_conditions:
+#       - moisture
+#       - light
+#       - temperature
+#       - conductivity
+#       - battery
+
+
+ble_monitor:
+  discovery: False
+  period: 30
+  restore_state: True
+  use_median: True
+  log_spikes: True
+#   active_scan: True
+  devices:
+    - mac: 'C4:7C:8D:66:37:B4'
+      name: 'Coffee arabica'
+    - mac: 'C4:7C:8D:6B:CA:6C'
+      name: 'Monstera deliciosa'
+    - mac: 'C4:7C:8D:6C:A2:E8'
+      name: 'Dracaena marginata'
+    - mac: 'C4:7C:8D:6C:A7:D3'
+      name: 'Ananas Comosus'
+    - mac: 'C4:7C:8D:6C:AC:42'
+      name: 'Snake Plant'
+
+
+# plant:
+#   # Coffee Arabica
+#   coffee_arabica:
+#     sensors:
+#       moisture: sensor.coffee_arabica_moisture
+#       battery: sensor.coffee_arabica_battery
+#       temperature: sensor.coffee_arabica_temperature
+#       conductivity: sensor.coffee_arabica_conductivity
+#       brightness: sensor.coffee_arabica_light_intensity
+#     min_moisture: 15
+#     max_moisture: 65
+#     min_battery: 20
+#     min_conductivity: 350
+#     max_conductivity: 2000
+#     min_temperature: 15
+#     max_temperature: 32
+#     min_brightness: 2000
+#     max_brightness: 30000
+#     check_days: 3
+
