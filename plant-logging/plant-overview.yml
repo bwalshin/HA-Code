@@ -8,19 +8,25 @@ card_mod:
 card:
   type: vertical-stack
   cards:
+
+#### BANNER ####
     - type: custom:banner-card
       heading:
         - mdi:flower
         - Plants
       background: '#413f3f'
       link: /lovelace/plants
+
+#### PLANTS ####
+#### COFFEE ARABICA - BEANS ####
     - type: entities
       entities:
         - entity: sensor.ble_moisture_coffee_arabica
           type: custom:multiple-entity-row
           secondary_info: last-changed
           show_state: false
-          name: Coffee arabica
+          name: Beans
+          icon: mdi:flower
           tap_action:
             action: navigate
             navigation_path: /lovelace/plants
@@ -69,11 +75,14 @@ card:
                 {% elif temp <= 20000 %} #43B02A
                 {% endif %};
                 }
+
+#### MONSTERA DELICIOSA ####
         - entity: sensor.ble_moisture_monstera_deliciosa
           type: custom:multiple-entity-row
           secondary_info: last-changed
           show_state: false
-          name: Monstera deliciosa
+          name: Monstera
+          icon: mdi:flower
           tap_action:
             action: navigate
             navigation_path: /lovelace/plants
@@ -122,11 +131,14 @@ card:
                 {% elif temp <= 15000 %} #43B02A
                 {% endif %};
                 }
+
+#### DRACAENA MARGINATA - DRAGON TREE ####
         - entity: sensor.ble_moisture_dracaena_marginata
           type: custom:multiple-entity-row
           secondary_info: last-changed
           show_state: false
-          name: Dracaena marginata
+          name: Dragon Tree
+          icon: mdi:flower
           tap_action:
             action: navigate
             navigation_path: /lovelace/plants
@@ -175,56 +187,115 @@ card:
                 {% elif temp <= 6000 %} #43B02A
                 {% endif %};
                 }
-        - entity: sensor.ble_moisture_dracaena_marginata
+
+#### Ananas Comosus - Piña ####
+        - entity: sensor.ble_moisture_ananas_comosus
           type: custom:multiple-entity-row
           secondary_info: last-changed
           show_state: false
-          name: Ananas comosus
+          name: Piña
+          icon: mdi:flower
           tap_action:
             action: navigate
             navigation_path: /lovelace/plants
             haptic: medium
           entities:
-            - entity: sensor.ble_moisture_dracaena_marginata
+            - entity: sensor.ble_moisture_ananas_comosus
               name: Moisture
               styles:
-                color: var(--pineapple-moist-color)
-            - entity: sensor.ble_temperature_dracaena_marginata
+                color: var(--pina-moist-color)
+            - entity: sensor.ble_temperature_ananas_comosus
               name: Temp
               styles:
-                color: var(--pineapple-temp-color)
-            - entity: sensor.ble_conductivity_dracaena_marginata
+                color: var(--pina-temp-color)
+            - entity: sensor.ble_conductivity_ananas_comosus
               name: Fertility
               styles:
-                color: var(--pineapple-fert-color)
-            - entity: sensor.ble_illuminance_dracaena_marginata
+                color: var(--pina-fert-color)
+            - entity: sensor.ble_illuminance_ananas_comosus
               name: Light
               styles:
-                color: var(--pineapple-light-color)
+                color: var(--pina-light-color)
           style: |
             :host {
-              --pineapple-moist-color:
-                {% set temp = states('sensor.ble_moisture_dracaena_marginata') | float %}
+              --pina-moist-color:
+                {% set temp = states('sensor.ble_moisture_coffee_arabica') | float %}
                 {% if temp <= 15 %} #E9343A
                 {% elif temp <= 37.5 %} #F98704
                 {% elif temp <= 60 %} #43B02A
                 {% endif %};
-              --pineapple-temp-color:
-                {% set temp = states('sensor.ble_temperature_dracaena_marginata') | float %}
+              --pina-temp-color:
+                {% set temp = states('sensor.ble_temperature_coffee_arabica') | float %}
                 {% if temp <= 50 %} #E9343A
-                {% elif temp <= 72.5 %} #F98704
+                {% elif temp <= 49.5 %} #F98704
                 {% elif temp <= 95 %} #43B02A
                 {% endif %};
-              --pineapple-fert-color:
-                {% set temp = states('sensor.ble_conductivity_dracaena_marginata') | float %}
+              --pina-fert-color:
+                {% set temp = states('sensor.ble_conductivity_coffee_arabica') | float %}
                 {% if temp <= 350 %} #E9343A
-                {% elif temp <= 9825 %} #F98704
-                {% elif temp <= 20000 %} #43B02A
+                {% elif temp <= 825 %} #F98704
+                {% elif temp <= 2000 %} #43B02A
                 {% endif %};
-              --pineapple-light-color:
-                {% set temp = states('sensor.ble_illuminance_dracaena_marginata') | float %}
+              --pina-light-color:
+                {% set temp = states('sensor.ble_illuminance_coffee_arabica') | float %}
                 {% if temp <= 3000 %} #E9343A
-                {% elif temp <= 19000 %} #F98704
+                {% elif temp <= 16000 %} #F98704
                 {% elif temp <= 35000 %} #43B02A
+                {% endif %};
+                }
+
+#### Deacaena Trifasciata - Geoffrey ####
+        - entity: sensor.ble_moisture_snake_plant
+          type: custom:multiple-entity-row
+          secondary_info: last-changed
+          show_state: false
+          name: Geoffrey
+          icon: mdi:flower
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/plants
+            haptic: medium
+          entities:
+            - entity: sensor.ble_moisture_snake_plant
+              name: Moisture
+              styles:
+                color: var(--snake-moist-color)
+            - entity: sensor.ble_temperature_snake_plant
+              name: Temp
+              styles:
+                color: var(--snake-temp-color)
+            - entity: sensor.ble_conductivity_snake_plant
+              name: Fertility
+              styles:
+                color: var(--snake-fert-color)
+            - entity: sensor.ble_illuminance_snake_plant
+              name: Light
+              styles:
+                color: var(--snake-light-color)
+          style: |
+            :host {
+              --snake-moist-color:
+                {% set temp = states('sensor.ble_moisture_snake_plant') | float %}
+                {% if temp <= 7 %} #E9343A
+                {% elif temp <= 21.5 %} #F98704
+                {% elif temp <= 50 %} #43B02A
+                {% endif %};
+              --snake-temp-color:
+                {% set temp = states('sensor.ble_temperature_snake_plant') | float %}
+                {% if temp <= 50 %} #E9343A
+                {% elif temp <= 69.5 %} #F98704
+                {% elif temp <= 89 %} #43B02A
+                {% endif %};
+              --snake-fert-color:
+                {% set temp = states('sensor.ble_conductivity_snake_plant') | float %}
+                {% if temp <= 300 %} #E9343A
+                {% elif temp <= 650 %} #F98704
+                {% elif temp <= 1000 %} #43B02A
+                {% endif %};
+              --snake-light-color:
+                {% set temp = states('sensor.ble_illuminance_snake_plant') | float %}
+                {% if temp <= 1500 %} #E9343A
+                {% elif temp <= 30750 %} #F98704
+                {% elif temp <= 60000 %} #43B02A
                 {% endif %};
                 }

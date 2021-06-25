@@ -1,0 +1,314 @@
+type: vertical-stack
+title: Monstera Deliciosa
+cards:
+
+#### DESCRIPTION ####
+  - type: markdown
+    content: |-
+      **Optimal Data Points**
+      Soil Moisture: **15 - 60%** ----- Temperature: **50-89 ºF**
+      Soil Fertility: **350 - 2000 μS** ----- Light Intensity: **800 - 15000 lux**
+
+#### GRAPHS ####
+  # - type: custom:mini-graph-card
+  #   entities:
+  #     - entity: sensor.ble_moisture_monstera_deliciosa
+  #       name: Moisture
+  #       show_state: true
+  #     - entity: sensor.ble_conductivity_monstera_deliciosa
+  #       name: Fertility
+  #       y_axis: secondary
+  #       show_state: true
+  #       color: '#7bbbd1'
+  #   color_thresholds:
+  #     - value: 15
+  #       color: '#E9343A'
+  #     - value: 37.5
+  #       color: '#F98704'
+  #     - value: 60
+  #       color: '#43B02A'
+  #   name: Soil Status
+  #   hours_to_show: 24
+  #   hour24: true
+  #   animate: true
+  #   min_bound_range: 35
+  #   lower_bound: 0
+  #   upper_bound: 60
+  #   min_bound_range_secondary: 350
+  #   lower_bound_secondary: 0
+  #   upper_bound_secondary: 2000
+  #   show:
+  #     icon_adaptive_color: true
+  #     labels: true
+  #     labels_secondary: true
+  # - type: horizontal-stack
+  #   cards:
+  #     - type: custom:mini-graph-card
+  #       entities:
+  #         - entity: sensor.ble_temperature_monstera_deliciosa
+  #           name: Monstera deliciosa Temperature
+  #       color_thresholds:
+  #         - value: 50
+  #           color: '#E9343A'
+  #         - value: 69.5
+  #           color: '#F98704'
+  #         - value: 89
+  #           color: '#43B02A'
+  #       name: Temperature
+  #       hours_to_show: 24
+  #       hour24: true
+  #       animate: true
+  #       show:
+  #         icon_adaptive_color: true
+  #     - type: custom:mini-graph-card
+  #       entities:
+  #         - entity: sensor.ble_illuminance_monstera_deliciosa
+  #           name: Monstera deliciosa Sunlight
+  #       color_thresholds:
+  #         - value: 800
+  #           color: '#E9343A'
+  #         - value: 7100
+  #           color: '#F98704'
+  #         - value: 15000
+  #           color: '#FAA826'
+  #       name: Sunlight
+  #       hours_to_show: 24
+  #       hour24: true
+  #       animate: true
+  #       show:
+  #         icon_adaptive_color: true
+
+#### MULTIPLE ENTITY ROWS ####
+#### PLANT OVERVIEW ####
+  - type: entities
+    entities:
+      - entity: sensor.ble_moisture_monstera_deliciosa
+        type: custom:multiple-entity-row
+        secondary_info: last-changed
+        show_state: false
+        name: No Name :(
+        icon: mdi:flower
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/plants
+          haptic: medium
+        entities:
+          - entity: sensor.ble_moisture_monstera_deliciosa
+            name: Moisture
+            styles:
+              color: var(--mondel-moist-color)
+          - entity: sensor.ble_temperature_monstera_deliciosa
+            name: Temp
+            styles:
+              color: var(--mondel-temp-color)
+          - entity: sensor.ble_conductivity_monstera_deliciosa
+            name: Fertility
+            styles:
+              color: var(--mondel-fert-color)
+          - entity: sensor.ble_illuminance_monstera_deliciosa
+            name: Light
+            styles:
+              color: var(--mondel-light-color)
+        style: |
+          :host {
+            --mondel-moist-color:
+              {% set temp = states('sensor.ble_moisture_monstera_deliciosa') | float %}
+              {% if temp <= 15 %} #E9343A
+              {% elif temp <= 37.5 %} #F98704
+              {% elif temp <= 60 %} #43B02A
+              {% endif %};
+            --mondel-temp-color:
+              {% set temp = states('sensor.ble_temperature_monstera_deliciosa') | float %}
+              {% if temp <= 50 %} #E9343A
+              {% elif temp <= 69.5 %} #F98704
+              {% elif temp <= 89 %} #43B02A
+              {% endif %};
+            --mondel-fert-color:
+              {% set temp = states('sensor.ble_conductivity_monstera_deliciosa') | float %}
+              {% if temp <= 350 %} #E9343A
+              {% elif temp <= 9825 %} #F98704
+              {% elif temp <= 20000 %} #43B02A
+              {% endif %};
+            --mondel-light-color:
+              {% set temp = states('sensor.ble_illuminance_monstera_deliciosa') | float %}
+              {% if temp <= 800 %} #E9343A
+              {% elif temp <= 7100 %} #F98704
+              {% elif temp <= 15000 %} #43B02A
+              {% endif %};
+              }
+
+#### INDIVIDUAL SENSOR DETAILS ####
+  - type: entities
+    entities:
+      - entity: sensor.ble_moisture_monstera_deliciosa
+        type: custom:multiple-entity-row
+        secondary_info: last-updated
+        name: Moisture
+        state_header: Water
+        show_state: false
+        entities:
+          - attribute: median
+            name: median
+          - attribute: mean
+            name: mean
+          - attribute: last median of
+            name: last median
+          - attribute: last packet id
+            name: last p-id
+          - attribute: rssi
+            name: rssi
+            styles:
+              color: var(--awair-score-color)
+        style: |
+          :host {
+            --awair-score-color:
+              {% set temp = state_attr('sensor.ble_moisture_monstera_deliciosa', 'rssi') | int %}
+              {% if temp >= -50 %} #49CE4C
+              {% elif temp >= -60 %} #FDD125
+              {% elif temp >= -70 %} #FAA826
+              {% elif temp >= -80 %} #F98704
+              {% elif temp >= -90 %} #fb5b1b
+              {% elif temp >= -100 %} #E9343A
+              {% endif %};
+              }
+  - type: entities
+    entities:
+      - entity: sensor.ble_temperature_monstera_deliciosa
+        type: custom:multiple-entity-row
+        secondary_info: last-updated
+        name: Temperature
+        state_header: Temp
+        show_state: false
+        entities:
+          - attribute: median
+            name: median
+          - attribute: mean
+            name: mean
+          - attribute: last median of
+            name: last median
+          - attribute: last packet id
+            name: last p-id
+          - attribute: rssi
+            name: rssi
+            styles:
+              color: var(--awair-score-color)
+        style: |
+          :host {
+            --awair-score-color:
+              {% set temp = state_attr('sensor.ble_temperature_monstera_deliciosa', 'rssi') | int %}
+              {% if temp >= -50 %} #49CE4C
+              {% elif temp >= -60 %} #FDD125
+              {% elif temp >= -70 %} #FAA826
+              {% elif temp >= -80 %} #F98704
+              {% elif temp >= -90 %} #fb5b1b
+              {% elif temp >= -100 %} #E9343A
+              {% endif %};
+              }
+  - type: entities
+    entities:
+      - entity: sensor.ble_illuminance_monstera_deliciosa
+        type: custom:multiple-entity-row
+        secondary_info: last-updated
+        name: Sunlight
+        state_header: Light
+        show_state: false
+        entities:
+          - attribute: median
+            name: median
+          - attribute: mean
+            name: mean
+          - attribute: last median of
+            name: last median
+          - attribute: last packet id
+            name: last p-id
+          - attribute: rssi
+            name: rssi
+            styles:
+              color: var(--awair-score-color)
+        style: |
+          :host {
+            --awair-score-color:
+              {% set temp = state_attr('sensor.ble_illuminance_monstera_deliciosa', 'rssi') | int %}
+              {% if temp >= -50 %} #49CE4C
+              {% elif temp >= -60 %} #FDD125
+              {% elif temp >= -70 %} #FAA826
+              {% elif temp >= -80 %} #F98704
+              {% elif temp >= -90 %} #fb5b1b
+              {% elif temp >= -100 %} #E9343A
+              {% endif %};
+              }
+  - type: entities
+    entities:
+      - entity: sensor.ble_conductivity_monstera_deliciosa
+        type: custom:multiple-entity-row
+        secondary_info: last-updated
+        name: Fertility
+        state_header: Fertility
+        show_state: false
+        entities:
+          - attribute: median
+            name: median
+          - attribute: mean
+            name: mean
+          - attribute: last median of
+            name: last median
+          - attribute: last packet id
+            name: last p-id
+          - attribute: rssi
+            name: rssi
+            styles:
+              color: var(--awair-score-color)
+        style: |
+          :host {
+            --awair-score-color:
+              {% set temp = state_attr('sensor.ble_conductivity_monstera_deliciosa', 'rssi') | int %}
+              {% if temp >= -50 %} #49CE4C
+              {% elif temp >= -60 %} #FDD125
+              {% elif temp >= -70 %} #FAA826
+              {% elif temp >= -80 %} #F98704
+              {% elif temp >= -90 %} #fb5b1b
+              {% elif temp >= -100 %} #E9343A
+              {% endif %};
+              }
+
+#### MI FLORA INTEGRATION CODE ####
+  # - type: entities
+  #   entities:
+  #     - entity: sensor.monstera_deliciosa_moisture
+  #       type: custom:multiple-entity-row
+  #       secondary_info: last-updated
+  #       name: MiFlora Moisture
+  #       state_header: Moisture
+  #       show_state: true
+  # - type: entities
+  #   entities:
+  #     - entity: sensor.monstera_deliciosa_temperature
+  #       type: custom:multiple-entity-row
+  #       secondary_info: last-updated
+  #       name: MiFlora Temperature
+  #       state_header: Temperature
+  #       show_state: true
+  # - type: entities
+  #   entities:
+  #     - entity: sensor.monstera_deliciosa_light_intensity
+  #       type: custom:multiple-entity-row
+  #       secondary_info: last-updated
+  #       name: MiFlora Sunlight
+  #       state_header: Sunlight
+  #       show_state: true
+  # - type: entities
+  #   entities:
+  #     - entity: sensor.monstera_deliciosa_conductivity
+  #       type: custom:multiple-entity-row
+  #       secondary_info: last-updated
+  #       name: MiFlora Fertility
+  #       state_header: Fertility
+  #       show_state: true
+  # - type: entities
+  #   entities:
+  #     - entity: sensor.monstera_deliciosa_battery
+  #       type: custom:multiple-entity-row
+  #       secondary_info: last-updated
+  #       name: MiFlora Battery
+  #       state_header: Battery
+  #       show_state: true
