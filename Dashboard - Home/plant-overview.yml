@@ -1,0 +1,455 @@
+
+#### CARD DESIGN ####
+# type: custom:mod-card
+# card_mod:
+#   style: |
+#     ha-card {
+#     background-color: #413f3f;
+#     padding-bottom: 10px;
+#     }
+# card:
+  type: vertical-stack
+  cards:
+
+#### BANNER ####
+    - type: custom:banner-card
+      heading:
+        - mdi:flower
+        - Plants
+      background: '#413f3f'
+      link: /lovelace/plants
+      style: |
+        :host{
+          --banner-card-heading-size: 1em
+        }
+
+#### PLANT THERSHOLD ####
+    - type: custom:banner-card
+      heading: '.'
+      background: 'linear-gradient(90deg, #E9343A, #F98704, #FAA826, #FDD125, #49CE4C, #FDD125, #FAA826, #F98704, #E9343A)'
+      style: |
+        :host{
+          --banner-card-heading-size: .1em
+        }
+
+#### COFFEE ARABICA - BEANS ####
+    - type: entities
+      entities:
+        - entity: sensor.ble_moisture_coffee_arabica
+          type: custom:multiple-entity-row
+          secondary_info: last-changed
+          show_state: false
+          name: Beans
+          icon: mdi:flower
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/plants
+            haptic: medium
+          entities:
+            - entity: sensor.ble_moisture_coffee_arabica
+              name: Moisture
+              styles:
+                color: var(--ca-moist-color)
+            - entity: sensor.ble_temperature_coffee_arabica
+              name: Temp
+              styles:
+                color: var(--ca-temp-color)
+            - entity: sensor.ble_conductivity_coffee_arabica
+              name: Fertility
+              styles:
+                color: var(--ca-fert-color)
+            - entity: sensor.ble_illuminance_coffee_arabica
+              name: Light
+              styles:
+                color: var(--ca-light-color)
+          style: |
+            :host {
+              --ca-moist-color:
+                {% set temp = states('sensor.ble_moisture_coffee_arabica') | float %}
+                {% if temp <= 15 %} #E9343A
+                {% elif temp <= 20.625 %} #F98704
+                {% elif temp <= 26.25 %} #FAA826
+                {% elif temp <= 31.875 %} #FDD125
+                {% elif temp <= 37.5 %} #49CE4C
+                {% elif temp <= 43.125 %} #FDD125
+                {% elif temp <= 48.75 %} #FAA826
+                {% elif temp <= 54.375 %} #F98704
+                {% elif temp <= 60 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --ca-temp-color:
+                {% set temp = states('sensor.ble_temperature_coffee_arabica') | float %}
+                {% if temp <= 50 %} #E9343A
+                {% elif temp <= 54.875 %} #F98704
+                {% elif temp <= 59.75 %} #FAA826
+                {% elif temp <= 64.625 %} #FDD125
+                {% elif temp <= 69.5 %} #49CE4C
+                {% elif temp <= 74.375 %} #FDD125
+                {% elif temp <= 79.25 %} #FAA826
+                {% elif temp <= 84.125 %} #F98704
+                {% elif temp <= 89 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --ca-fert-color:
+                {% set temp = states('sensor.ble_conductivity_coffee_arabica') | float %}
+                {% if temp <= 350 %} #E9343A
+                {% elif temp <= 2718.75  %} #F98704
+                {% elif temp <= 5087.5 %} #FAA826
+                {% elif temp <= 7456.25 %} #FDD125
+                {% elif temp <= 9825 %} #49CE4C
+                {% elif temp <= 12368.75 %} #FDD125
+                {% elif temp <= 14912.5 %} #FAA826
+                {% elif temp <= 17456.25 %} #F98704
+                {% elif temp <= 20000 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --ca-light-color:
+                {% set temp = states('sensor.ble_illuminance_coffee_arabica') | float %}
+                {% if temp <= 3700 %} #E9343A
+                {% elif temp <= 5737.5  %} #F98704
+                {% elif temp <= 7775 %} #FAA826
+                {% elif temp <= 9812.5 %} #FDD125
+                {% elif temp <= 11850 %} #49CE4C
+                {% elif temp <= 13887.5 %} #FDD125
+                {% elif temp <= 15925 %} #FAA826
+                {% elif temp <= 17962.5 %} #F98704
+                {% elif temp <= 20000 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+                }
+
+#### MONSTERA DELICIOSA ####
+        - entity: sensor.ble_moisture_monstera_deliciosa
+          type: custom:multiple-entity-row
+          secondary_info: last-changed
+          show_state: false
+          name: Monstera
+          icon: mdi:flower
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/plants
+            haptic: medium
+          entities:
+            - entity: sensor.ble_moisture_monstera_deliciosa
+              name: Moisture
+              styles:
+                color: var(--monstera-moist-color)
+            - entity: sensor.ble_temperature_monstera_deliciosa
+              name: Temp
+              styles:
+                color: var(--monstera-temp-color)
+            - entity: sensor.ble_conductivity_monstera_deliciosa
+              name: Fertility
+              styles:
+                color: var(--monstera-fert-color)
+            - entity: sensor.ble_illuminance_monstera_deliciosa
+              name: Light
+              styles:
+                color: var(--monstera-light-color)
+          style: |
+            :host {
+              --monstera-moist-color:
+                {% set temp = states('sensor.ble_moisture_monstera_deliciosa') | float %}
+                {% if temp <= 15 %} #E9343A
+                {% elif temp <= 20.625 %} #F98704
+                {% elif temp <= 26.25 %} #FAA826
+                {% elif temp <= 31.875 %} #FDD125
+                {% elif temp <= 37.5 %} #49CE4C
+                {% elif temp <= 43.125 %} #FDD125
+                {% elif temp <= 48.75 %} #FAA826
+                {% elif temp <= 54.375 %} #F98704
+                {% elif temp <= 60 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --monstera-temp-color:
+                {% set temp = states('sensor.ble_temperature_monstera_deliciosa') | float %}
+                {% if temp <= 50 %} #E9343A
+                {% elif temp <= 54.875 %} #F98704
+                {% elif temp <= 59.75 %} #FAA826
+                {% elif temp <= 64.625 %} #FDD125
+                {% elif temp <= 69.5 %} #49CE4C
+                {% elif temp <= 74.375 %} #FDD125
+                {% elif temp <= 79.25 %} #FAA826
+                {% elif temp <= 84.125 %} #F98704
+                {% elif temp <= 89 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --monstera-fert-color:
+                {% set temp = states('sensor.ble_conductivity_monstera_deliciosa') | float %}
+                {% if temp <= 350 %} #E9343A
+                {% elif temp <= 2718.75  %} #F98704
+                {% elif temp <= 5087.5 %} #FAA826
+                {% elif temp <= 7456.25 %} #FDD125
+                {% elif temp <= 9825 %} #49CE4C
+                {% elif temp <= 12368.75 %} #FDD125
+                {% elif temp <= 14912.5 %} #FAA826
+                {% elif temp <= 17456.25 %} #F98704
+                {% elif temp <= 20000 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --monstera-light-color:
+                {% set temp = states('sensor.ble_illuminance_monstera_deliciosa') | float %}
+                {% if temp <= 800 %} #E9343A
+                {% elif temp <= 1187.5  %} #F98704
+                {% elif temp <= 3950 %} #FAA826
+                {% elif temp <= 5525 %} #FDD125
+                {% elif temp <= 7100 %} #49CE4C
+                {% elif temp <= 9075 %} #FDD125
+                {% elif temp <= 11050 %} #FAA826
+                {% elif temp <= 13025 %} #F98704
+                {% elif temp <= 15000 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+                }
+
+#### DRACAENA MARGINATA - DRAGON TREE ####
+        - entity: sensor.ble_moisture_dracaena_marginata
+          type: custom:multiple-entity-row
+          secondary_info: last-changed
+          show_state: false
+          name: Dragon Tree
+          icon: mdi:flower
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/plants
+            haptic: medium
+          entities:
+            - entity: sensor.ble_moisture_dracaena_marginata
+              name: Moisture
+              styles:
+                color: var(--dracaena-moist-color)
+            - entity: sensor.ble_temperature_dracaena_marginata
+              name: Temp
+              styles:
+                color: var(--dracaena-temp-color)
+            - entity: sensor.ble_conductivity_dracaena_marginata
+              name: Fertility
+              styles:
+                color: var(--dracaena-fert-color)
+            - entity: sensor.ble_illuminance_dracaena_marginata
+              name: Light
+              styles:
+                color: var(--dracaena-light-color)
+          style: |
+            :host {
+              --dracaena-moist-color:
+                {% set temp = states('sensor.ble_moisture_dracaena_marginata') | float %}
+                {% if temp <= 15 %} #E9343A
+                {% elif temp <= 20.625 %} #F98704
+                {% elif temp <= 26.25 %} #FAA826
+                {% elif temp <= 31.875 %} #FDD125
+                {% elif temp <= 37.5 %} #49CE4C
+                {% elif temp <= 43.125 %} #FDD125
+                {% elif temp <= 48.75 %} #FAA826
+                {% elif temp <= 54.375 %} #F98704
+                {% elif temp <= 60 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --dracaena-temp-color:
+                {% set temp = states('sensor.ble_temperature_dracaena_marginata') | float %}
+                {% if temp <= 50 %} #E9343A
+                {% elif temp <= 54.875 %} #F98704
+                {% elif temp <= 59.75 %} #FAA826
+                {% elif temp <= 64.625 %} #FDD125
+                {% elif temp <= 69.5 %} #49CE4C
+                {% elif temp <= 74.375 %} #FDD125
+                {% elif temp <= 79.25 %} #FAA826
+                {% elif temp <= 84.125 %} #F98704
+                {% elif temp <= 89 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --dracaena-fert-color:
+                {% set temp = states('sensor.ble_conductivity_dracaena_marginata') | float %}
+                {% if temp <= 350 %} #E9343A
+                {% elif temp <= 2718.75  %} #F98704
+                {% elif temp <= 5087.5 %} #FAA826
+                {% elif temp <= 7456.25 %} #FDD125
+                {% elif temp <= 9825 %} #49CE4C
+                {% elif temp <= 12368.75 %} #FDD125
+                {% elif temp <= 14912.5 %} #FAA826
+                {% elif temp <= 17456.25 %} #F98704
+                {% elif temp <= 20000 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --dracaena-light-color:
+                {% set temp = states('sensor.ble_illuminance_dracaena_marginata') | float %}
+                {% if temp <= 1500 %} #E9343A
+                {% elif temp <= 2000  %} #F98704
+                {% elif temp <= 2500 %} #FAA826
+                {% elif temp <= 3000 %} #FDD125
+                {% elif temp <= 3500 %} #49CE4C
+                {% elif temp <= 4125 %} #FDD125
+                {% elif temp <= 4750 %} #FAA826
+                {% elif temp <= 5375 %} #F98704
+                {% elif temp <= 6000 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+                }
+
+#### Ananas Comosus - Piña ####
+        - entity: sensor.ble_moisture_ananas_comosus
+          type: custom:multiple-entity-row
+          secondary_info: last-changed
+          show_state: false
+          name: Piña
+          icon: mdi:flower
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/plants
+            haptic: medium
+          entities:
+            - entity: sensor.ble_moisture_ananas_comosus
+              name: Moisture
+              styles:
+                color: var(--pina-moist-color)
+            - entity: sensor.ble_temperature_ananas_comosus
+              name: Temp
+              styles:
+                color: var(--pina-temp-color)
+            - entity: sensor.ble_conductivity_ananas_comosus
+              name: Fertility
+              styles:
+                color: var(--pina-fert-color)
+            - entity: sensor.ble_illuminance_ananas_comosus
+              name: Light
+              styles:
+                color: var(--pina-light-color)
+          style: |
+            :host {
+              --pina-moist-color:
+                {% set temp = states('sensor.ble_moisture_coffee_arabica') | float %}
+                {% if temp <= 15 %} #E9343A
+                {% elif temp <= 20.625 %} #F98704
+                {% elif temp <= 26.25 %} #FAA826
+                {% elif temp <= 31.875 %} #FDD125
+                {% elif temp <= 37.5 %} #49CE4C
+                {% elif temp <= 43.125 %} #FDD125
+                {% elif temp <= 48.75 %} #FAA826
+                {% elif temp <= 54.375 %} #F98704
+                {% elif temp <= 60 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --pina-temp-color:
+                {% set temp = states('sensor.ble_temperature_coffee_arabica') | float %}
+                {% if temp <= 50 %} #E9343A
+                {% elif temp <= 55 %} #F98704
+                {% elif temp <= 60 %} #FAA826
+                {% elif temp <= 65 %} #FDD125
+                {% elif temp <= 72.5 %} #49CE4C
+                {% elif temp <= 77 %} #FDD125
+                {% elif temp <= 82 %} #FAA826
+                {% elif temp <= 87 %} #F98704
+                {% elif temp <= 95 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --pina-fert-color:
+                {% set temp = states('sensor.ble_conductivity_coffee_arabica') | float %}
+                {% if temp <= 350 %} #E9343A
+                {% elif temp <= 468.75  %} #F98704
+                {% elif temp <= 587.5 %} #FAA826
+                {% elif temp <= 706.25 %} #FDD125
+                {% elif temp <= 825 %} #49CE4C
+                {% elif temp <= 1118.75 %} #FDD125
+                {% elif temp <= 1412.5 %} #FAA826
+                {% elif temp <= 1706.25 %} #F98704
+                {% elif temp <= 2000 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --pina-light-color:
+                {% set temp = states('sensor.ble_illuminance_coffee_arabica') | float %}
+                {% if temp <= 3000 %} #E9343A
+                {% elif temp <= 1025  %} #F98704
+                {% elif temp <= 9500 %} #FAA826
+                {% elif temp <= 12750 %} #FDD125
+                {% elif temp <= 16000 %} #49CE4C
+                {% elif temp <= 20750 %} #FDD125
+                {% elif temp <= 25500 %} #FAA826
+                {% elif temp <= 30250 %} #F98704
+                {% elif temp <= 35000 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+                }
+
+#### Deacaena Trifasciata - Geoffrey ####
+        - entity: sensor.ble_moisture_snake_plant
+          type: custom:multiple-entity-row
+          secondary_info: last-changed
+          show_state: false
+          name: Geoffrey
+          icon: mdi:flower
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/plants
+            haptic: medium
+          entities:
+            - entity: sensor.ble_moisture_snake_plant
+              name: Moisture
+              styles:
+                color: var(--snake-moist-color)
+            - entity: sensor.ble_temperature_snake_plant
+              name: Temp
+              styles:
+                color: var(--snake-temp-color)
+            - entity: sensor.ble_conductivity_snake_plant
+              name: Fertility
+              styles:
+                color: var(--snake-fert-color)
+            - entity: sensor.ble_illuminance_snake_plant
+              name: Light
+              styles:
+                color: var(--snake-light-color)
+          style: |
+            :host {
+              --snake-moist-color:
+                {% set temp = states('sensor.ble_moisture_snake_plant') | float %}
+                {% if temp <= 7 %} #E9343A
+                {% elif temp <= 10.625 %} #F98704
+                {% elif temp <= 14.25 %} #FAA826
+                {% elif temp <= 17.875 %} #FDD125
+                {% elif temp <= 21.5 %} #49CE4C
+                {% elif temp <= 28.625 %} #FDD125
+                {% elif temp <= 35.75 %} #FAA826
+                {% elif temp <= 42.875 %} #F98704
+                {% elif temp <= 50 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --snake-temp-color:
+                {% set temp = states('sensor.ble_temperature_snake_plant') | float %}
+                {% if temp <= 50 %} #E9343A
+                {% elif temp <= 54.875 %} #F98704
+                {% elif temp <= 59.75 %} #FAA826
+                {% elif temp <= 64.625 %} #FDD125
+                {% elif temp <= 69.5 %} #49CE4C
+                {% elif temp <= 74.375 %} #FDD125
+                {% elif temp <= 79.25 %} #FAA826
+                {% elif temp <= 84.125 %} #F98704
+                {% elif temp <= 89 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --snake-fert-color:
+                {% set temp = states('sensor.ble_conductivity_snake_plant') | float %}
+                {% if temp <= 300 %} #E9343A
+                {% elif temp <= 387.5 %} #F98704
+                {% elif temp <= 475 %} #FAA826
+                {% elif temp <= 562.5 %} #FDD125
+                {% elif temp <= 650 %} #49CE4C
+                {% elif temp <= 737.5 %} #FDD125
+                {% elif temp <= 825 %} #FAA826
+                {% elif temp <= 912.5 %} #F98704
+                {% elif temp <= 1000 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+              --snake-light-color:
+                {% set temp = states('sensor.ble_illuminance_snake_plant') | float %}
+                {% if temp <= 1500 %} #E9343A
+                {% elif temp <= 8812.5 %} #F98704
+                {% elif temp <= 16125 %} #FAA826
+                {% elif temp <= 23437.5 %} #FDD125
+                {% elif temp <= 30750 %} #49CE4C
+                {% elif temp <= 38062.5 %} #FDD125
+                {% elif temp <= 45375 %} #FAA826
+                {% elif temp <= 52687.5 %} #F98704
+                {% elif temp <= 60000 %} #E9343A
+                {% elif temp <= 999999 %} #E9343A
+                {% endif %};
+                }

@@ -1,19 +1,28 @@
-type: custom:mod-card
-card_mod:
-  style: |
-    ha-card {
-    background-color: #413f3f;
-    padding-bottom: 10px;
-    }
-card:
+#### CARD DESIGN ####
+# type: custom:mod-card
+# card_mod:
+#   style: |
+#     ha-card {
+#     background-color: #413f3f;
+#     padding-bottom: 10px;
+#     }
+# card:
   type: vertical-stack
   cards:
+
+#### BANNER ####
     - type: custom:banner-card
       heading:
         - mdi:bed
         - Bedroom
       background: '#413f3f'
       link: /lovelace/bedroom
+      style: |
+        :host{
+          --banner-card-heading-size: 1em
+        }
+
+#### AWAIR SENSOR ####
     - type: entities
       entities:
         - entity: sensor.awair_element_awair_score
@@ -30,6 +39,8 @@ card:
           entities:
             - entity: sensor.awair_element_awair_score
               name: Score
+              styles:
+                color: var(--awair-score-color)
             - entity: sensor.awair_element_temperature
               name: Temp
               styles:
@@ -122,13 +133,16 @@ card:
               #   {% elif temp <= 100 %} #43B02A
               #   {% endif %};
                 }
+
+#### AIR PURIFIER ####
         - entity: fan.bedroom_air_purifier
           type: custom:multiple-entity-row
           # secondary_info:
           #   attribute: air_quality
           show_state: true
           state_header: Status
-          name: Air Purifier
+          name: Jerome
+          icon: mdi:air-filter
           tap_action:
             action: navigate
             navigation_path: /lovelace/bedroom

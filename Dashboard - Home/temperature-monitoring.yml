@@ -1,20 +1,35 @@
-type: custom:mod-card
-card_mod:
-  style: |
-    ha-card {
-      background-color: #413f3f;
-      padding-top: 5px;
-      padding-bottom: 5px;
-    }
-card:
+#### CARD DESIGN ####
+# type: custom:mod-card
+# card_mod:
+#   style: |
+#     ha-card {
+#       background-color: #413f3f;
+#       padding-top: 5px;
+#       padding-bottom: 5px;
+#     }
+# card:
   type: vertical-stack
   cards:
+
+#### BANNER ####
+    - type: custom:banner-card
+      heading:
+        - mdi:thermometer
+        - Temperatures
+      background: '#413f3f'
+      link: /lovelace/plants
+      style: |
+        :host{
+          --banner-card-heading-size: 1em
+        }
+
+#### Temperatures ####
     - type: entities
       entities:
         - entity: weather.home
           type: custom:multiple-entity-row
-          name: Temps
-          show_state: true
+          name: ' '
+          show_state: false
           state_header: Status
           entities:
             - entity: sensor.awair_element_temperature

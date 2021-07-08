@@ -6,8 +6,8 @@ cards:
   - type: markdown
     content: |-
       **Optimal Data Points**
-      Soil Moisture: **7 - 50%** ----- lux** Temperature: **50-89 ºF**
-      Soil Fertility: **300 - 1000 μS** ----- Light Intensity: **1500 - 60000
+      Soil Moisture: **7 - 50%** ----- Temperature: **50-89 ºF**
+      Soil Fertility: **300 - 1000 μS** ----- Light Intensity: **1500 - 60000lux**
 
 #### GRAPHS ####
   # - type: custom:mini-graph-card
