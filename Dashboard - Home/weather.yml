@@ -1,0 +1,117 @@
+type: custom:button-card
+entity: sensor.openweathermap_weather
+icon: |
+  [[[ if (entity.state === 'clear sky')
+  return "mdi:weather-sunny";
+# hail
+    if (entity.state === 'Sleet')
+  return "mdi:hail";
+# haze
+    if (entity.state === 'Haze')
+  return "mdi:haze";
+# tornado
+    if (entity.state === 'squalls' || 
+        entity.state === 'tornado')
+  return "mdi:tornado";
+# weather-cloudy
+    if (entity.state === 'scattered clouds' || 
+        entity.state === 'broken clouds' || 
+        entity.state === 'overcast clouds')
+  return "mdi:weather-cloudy";
+# weather-cloudy-alert
+    if (entity.state === 'volcanic ash')
+  return "mdi:weather-cloudy-alert";
+# weather-fog
+    if (entity.state === 'mist' ||
+        entity.state === 'Smoke' ||
+        entity.state === 'fog')
+  return "mdi:weather-fog";
+# weather-lightning
+    if (entity.state === 'thunderstorm' ||
+        entity.state === 'light-thunderstorm' ||
+        entity.state === 'heavy-thunderstorm' ||
+        entity.state === 'ragged-thunderstorm')
+  return "mdi:weather-lightning";
+# weather-lightning-rainy
+    if (entity.state === 'thunderstorm with light rain' || 
+        entity.state === 'thunderstorm with rain' || 
+        entity.state === 'thunderstorm with heavy rain' || 
+        entity.state === 'thunderstorm with light drizzle' || 
+        entity.state === 'thunderstorm with drizzle' || 
+        entity.state === 'thunderstorm with heavy drizzle')
+  return "mdi:weather-lightning-rainy";
+# weather-partly-cloudy
+    if (entity.state === 'few clouds')
+  return "mdi:weather-partly-cloudy";
+# weather-partly-rainy
+    if (entity.state === 'shower rain' || 
+        entity.state === 'light intensity drizzle' || 
+        entity.state === 'drizzle' || 
+        entity.state === 'heavy intensity drizzle' || 
+        entity.state === 'light intesity drizzle rain' || 
+        entity.state === 'drizzle rain' || 
+        entity.state === 'heavy intensity drizzle rain' || 
+        entity.state === 'shower rain and drizzle' || 
+        entity.state === 'heavy shower rain and drizzle' || 
+        entity.state === 'light intensity shower rain' || 
+        entity.state === 'shower rain' || 
+        entity.state === 'heavy intensity shower rain' || 
+        entity.state === 'ragged shower rain')
+  return "mdi:weather-partly-rainy";
+# weather-partly-snowy-rainy
+    if (entity.state === 'Light rain and snow' ||
+        entity.state === 'Rain and snow' || 
+        entity.state === 'Light shower snow')
+  return "mdi:weather-partly-snowy-rainy";
+# weather-pouring
+    if (entity.state === 'rain' || 
+        entity.state === 'light rain' || 
+        entity.state === 'moderate rain' || 
+        entity.state === 'heavy intensity rain' || 
+        entity.state === 'very heavy rain' || 
+        entity.state === 'extreme rain')
+  return "mdi:weather-pouring";
+# weather-snowy
+    if (entity.state === 'light snow' || 
+        entity.state === 'Snow' || 
+        entity.state === 'Light shower sleet' || 
+        entity.state === 'Shower sleet' || 
+        entity.state === 'Shower snow')
+  return "mdi:weather-snowy";
+# weather-snowy-heavy
+    if (entity.state === 'Heavy snow' ||
+        entity.state === 'Heavy shower snow')
+  return "mdi:weather-partly-snowy-heavy";
+# weather-snowy-rainy
+    if (entity.state === 'freezing rain')
+  return "mdi:weather-snowy-rainy";
+# weather-windy
+    if (entity.state === 'sand/ dust whirls' ||
+        entity.state === 'sand' ||
+        entity.state === 'dust')
+  return "mdi:weather-windy";
+  else
+  return "mdi:information-off-outline";
+  ]]]
+show_state: true
+show_name: false
+aspect_ratio: 1/1
+styles:
+  state:
+    - align-self: center
+    - justify-self: center
+    - font-size: 12px
+  img_cell:
+    - align-self: center
+    - justify-self: center
+    - padding-top: 25%
+    - margin: none
+  icon:
+    - width: 70%
+    - margin-top: '-10%'
+  card:
+    - border-radius: 10%
+    - padding: 10%
+    - color: ivory
+    - text-shadow: 0px 0px 5px black
+    - text-transform: capitalize
